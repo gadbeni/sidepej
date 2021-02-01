@@ -116,7 +116,7 @@
 		  	$('#provincia_id').on('change',function(e){
 			  var dep_id  = e.target.value;
 			  
-			  $.get('/municipio/' + dep_id, function(data){
+			  $.get('/sidepej/municipio/' + dep_id, function(data){
 			    $('#municipio_id').empty();
 			    $('#municipio_id').append('<option value="0" disabled="true" selected="true">Seleccione Municipio</option>');
 
