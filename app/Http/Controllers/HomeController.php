@@ -32,11 +32,9 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function municipio()
+    public function municipio($id)
     {
-        $dep_id = Input::get('dep_id');
-
-        $municipio = Municipio::where('provincia_id',$dep_id)->get();
+        $municipio = Municipio::where('provincia_id',$id)->get();
         return response()->json($municipio);
     }
 }

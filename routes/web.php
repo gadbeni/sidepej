@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('personeriajusticia','PersoneriajusticiaController');
 	Route::get('pdfsecretariajusticia/{id}', 'ReporteController@pdfsecretariajusticia')->name('pdfsecretariajusticia');
 	//Trae los datos heredados de provincias(Select Heredado)
-	Route::get('municipio','HomeController@municipio');
+	Route::get('/municipio/{id}','HomeController@municipio');
 
 	//Reportes Direccion coordinacion municipal
 	//REPORTE COORDINACION MUNICIPAL: POR FECHA

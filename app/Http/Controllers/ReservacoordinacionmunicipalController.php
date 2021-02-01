@@ -62,8 +62,12 @@ class ReservacoordinacionmunicipalController extends Controller
      */
     public function create()
     {
-        $sucursales = Auth::user()->sucursales;
-
+        if (auth()->user()->hasRole('Admin')) {
+            $sucursales = \App\Sucursal::all();
+        } else {
+           $sucursales = Auth::user()->sucursales;
+        }
+        
         $provincias=DB::table('provincias')->orderBy('nombre', 'asc')->get();
         return view("reservacoordinacionmunicipal.create", compact('provincias','sucursales'));
     }
