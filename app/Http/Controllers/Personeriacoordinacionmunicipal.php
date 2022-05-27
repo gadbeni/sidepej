@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use App\Reservacoormunicipal;
 use App\Personeriacoormunicipal;
+use Illuminate\Support\Str;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class Personeriacoordinacionmunicipal extends Controller
 {
@@ -30,7 +32,8 @@ class Personeriacoordinacionmunicipal extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request);
+        // dd($request);
+        // return $request;
         $search = $request->query('search');
         $sentencia = $search ? "(
                         reservacoormunicipals.nombre like '%$search%' or
@@ -51,9 +54,11 @@ class Personeriacoordinacionmunicipal extends Controller
                     ->select('pcm.id','reservacoormunicipals.nombre as reserva','expedicions.nombre as expedicion','objetos.nombre as objeto','ambitoaplicacions.nombre as ambitoaplicacion','pcm.fechaIngreso','pcm.hojaRuta','pcm.representante','pcm.CI','pcm.fechaEntrega','pcm.fechaConclusiontramite','pcm.archivo')
                     ->whereRaw($sentencia)
                     ->orderBy('pcm.id', 'desc')
+                    // ->get();
                     ->paginate();
 
-            //dd($personerias);
+            // return $personerias;
+            // dd($personerias);
 
             return view('personeriacoordinacionmunicipal.index', compact('personerias','search'));
     }
@@ -65,6 +70,7 @@ class Personeriacoordinacionmunicipal extends Controller
      */
     public function create()
     {
+        // return 1;
         $reservas=DB::table('reservacoormunicipals as rcm')
                 ->join('estadotramites','estadotramites.id','=','rcm.estadotramite_id')
                 ->select('rcm.id','rcm.nombre as reserva','estadotramites.nombre as estadotramite')
@@ -88,6 +94,7 @@ class Personeriacoordinacionmunicipal extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $clientIP =\Request::ip ();
 
         try{
@@ -122,27 +129,50 @@ class Personeriacoordinacionmunicipal extends Controller
             $personeria->fechaConclusiontramite = $request->fechaConclusiontramite;
             $personeria->user_id = Auth::user()->id;
 
-        if(Input::hasFile('archivo'))
-        {
-            $file=Input::file('archivo');
-            $file->move(public_path().'/archivos/personeria/',$file->getClientOriginalName());
-            $personeria->archivo=$file->getClientOriginalName();
-        }
-        $personeria->save();
+        // if(Input::hasFile('archivo'))
+        // {
+        //     $file=Input::file('archivo');
+        //     return $file->getClientOriginalName();
+        //     $file->move(public_path().'/archivos/personeria/',$file->getClientOriginalName());
+        //     $personeria->archivo=$file->getClientOriginalName();
+        // }
 
-            //cambia estado condicion a la tabla reservas->condicionPersoneria=0
-            $reservas = Reservacoormunicipal::findOrFail($personeria->reservacoormunicipal_id);
-            $reservas->condicionPersoneria = '0';
-            $reservas->update();
 
-        DB::commit();
-
-            }catch(\Exception $e){
-                 DB::rollback();
+            $file = $request->file('archivo');
+            if($file)
+            {  
+                // $nombre_origen = $file->getClientOriginalName();
+                        
+                $newFileName = Str::random(20).time().'.'.$file->getClientOriginalExtension();
+                        
+                $dir = "personeria_juridicas/".date('F').date('Y');
+                        
+                Storage::makeDirectory($dir);
+                Storage::disk('public')->put($dir.'/'.$newFileName, file_get_contents($file));
+                $personeria->archivo = $dir.'/'.$newFileName;
+            } 
+            else
+            {
+                $personeria->archivo = null;
             }
 
-        toast('Personería registrada con éxito!','success');
-        return redirect()->route('personeriacoordinacionmunicipal.index');
+            $personeria->save();
+
+                //cambia estado condicion a la tabla reservas->condicionPersoneria=0
+                $reservas = Reservacoormunicipal::findOrFail($personeria->reservacoormunicipal_id);
+                $reservas->condicionPersoneria = '0';
+                $reservas->update();
+
+            DB::commit();
+            return redirect()->route('personeriacoordinacionmunicipal.index')->with('success','Registro creado satisfactoriamente');
+
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->route('personeriacoordinacionmunicipal.index')->with('warning','Error al crear el registro');
+        }
+
+        // toast('Personería registrada con éxito!','success');
+        // return redirect()->route('personeriacoordinacionmunicipal.index');
     }
 
     /**

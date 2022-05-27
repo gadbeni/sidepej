@@ -30,6 +30,7 @@ class PersoneriajusticiaController extends Controller
      */
     public function index(Request $request)
     {
+      
         $search = $request->query('search');
         $sentencia = $search ? "(
                         reservajusticias.nombre like '%$search%' or
