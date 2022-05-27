@@ -51,7 +51,7 @@ class Personeriacoordinacionmunicipal extends Controller
                     ->join('objetos','objetos.id','=','pcm.objeto_id')
                     ->join('tipoorganizacions','tipoorganizacions.id','=','pcm.tipoorganizacion_id')
                     ->join('ambitoaplicacions','ambitoaplicacions.id','=','pcm.ambitoaplicacion_id')
-                    ->select('pcm.id','reservacoormunicipals.nombre as reserva','expedicions.nombre as expedicion','objetos.nombre as objeto','ambitoaplicacions.nombre as ambitoaplicacion','pcm.fechaIngreso','pcm.hojaRuta','pcm.representante','pcm.CI','pcm.fechaEntrega','pcm.fechaConclusiontramite','pcm.archivo')
+                    ->select('pcm.id','reservacoormunicipals.nombre as reserva','expedicions.nombre as expedicion','objetos.nombre as objeto','ambitoaplicacions.nombre as ambitoaplicacion','pcm.fechaIngreso','pcm.hojaRuta','pcm.representante','pcm.CI','pcm.fechaEntrega','pcm.fechaConclusiontramite','pcm.archivo', 'pcm.file_name')
                     ->whereRaw($sentencia)
                     ->orderBy('pcm.id', 'desc')
                     // ->get();
@@ -141,7 +141,7 @@ class Personeriacoordinacionmunicipal extends Controller
             $file = $request->file('archivo');
             if($file)
             {  
-                // $nombre_origen = $file->getClientOriginalName();
+                $personeria->file_name = $file->getClientOriginalName();
                         
                 $newFileName = Str::random(20).time().'.'.$file->getClientOriginalExtension();
                         
@@ -154,6 +154,7 @@ class Personeriacoordinacionmunicipal extends Controller
             else
             {
                 $personeria->archivo = null;
+                $personeria->file_name = null;
             }
 
             $personeria->save();

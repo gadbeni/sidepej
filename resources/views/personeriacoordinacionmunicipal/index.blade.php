@@ -57,7 +57,7 @@
                               <td style="width:90px">{{$personeria->fechaConclusiontramite}}</td>
                               <td style="width:160px">
                                 @can('archivo.coordinacionmunicipal')
-                                <a href="{{asset('/archivos/personeria/'.$personeria->archivo)}}" download="{{$personeria->archivo}}" class="btn btn-info" title="Descargar Documento"><i class="fa fa-download"></i></a>
+                                <a href="{{asset('storage/'.$personeria->archivo)}}" download="{{$personeria->file_name}}" class="btn btn-info" title="Descargar Documento"><i class="fa fa-download"></i></a>
                                 @endcan
 
                                 @can('report.fichadatos_coordinacionmunicipal')

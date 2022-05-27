@@ -43,6 +43,8 @@ class CreatePersoneriacoormunicipalsTable extends Migration
             //ip del usuario que actualiza el registro
             $table->string('registro_clientIP_update', 15);
             $table->string('archivo', 999)->nullable();
+            $table->string('file_name')->nullable();
+
             $table->boolean('condicion')->default(1);
             $table->timestamps();
 
