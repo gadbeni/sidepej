@@ -40,6 +40,9 @@ class CreateReservajusticiasTable extends Migration
             $table->foreign('estadotramite_id')->references('id')->on('estadotramites');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('sucursal_id')->references('id')->on('sucursals');
+
+            $table->smallInteger('status')->default(1);
+            $table->softDeletes();
         });
     }
 

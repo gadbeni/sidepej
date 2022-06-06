@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use App\Reservajusticia;
 use App\Estadotramite;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 
 class ReservajusticiaController extends Controller
@@ -50,6 +51,7 @@ class ReservajusticiaController extends Controller
                 ->join('users','users.id','=','rj.user_id')
                 ->select('rj.id','rj.nombre','rj.nombreSolicitante','rj.costoReserva','rj.localidad','rj.fechainicio','rj.fechafin','rj.condicion','provincias.nombre as provincia','municipios.municipio','estadotramites.nombre as estadotramite','estadotramites.id as estadotramite_id','rj.numeroRecibo')
                 ->whereRaw($sentencia)
+                ->where('rj.deleted_at',null)
                 ->orderBy('rj.id', 'desc')
                 ->paginate();
 
@@ -185,10 +187,23 @@ class ReservajusticiaController extends Controller
      */
     public function destroy($id)
     {
-        $reserva=Reservajusticia::findOrFail($id);
-        $reserva->delete();
+        DB::beginTransaction();
+        try {
+            $reserva = Reservajusticia::findOrFail($id);
+            // return $reserva;
+            $reserva->update(['deleted_at' => Carbon::now()]);
+            DB::commit();
+            toast('Reserva de nombre eliminada con éxito!','success');
+            return redirect()->route('reservajusticia.index');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            toast('Error al eliminar la reserva de nombre!','error');
+            return redirect()->route('reservajusticia.index');
+        }
+        // $reserva=Reservajusticia::findOrFail($id);
+        // $reserva->delete();
 
-        toast('Eliminado correctamente!','warning');
-        return redirect()->route('reservajusticia.index');
+        // toast('Eliminado correctamente!','warning');
+        // return redirect()->route('reservajusticia.index');
     }
 }

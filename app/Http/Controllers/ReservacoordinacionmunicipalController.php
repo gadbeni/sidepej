@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use App\Reservacoormunicipal;
 use App\Estadotramite;
-use DB;
+use carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ReservacoordinacionmunicipalController extends Controller
 {
@@ -49,6 +50,7 @@ class ReservacoordinacionmunicipalController extends Controller
                 ->join('users','users.id','=','rcm.user_id')
                 ->select('rcm.id','rcm.nombre','rcm.nombreSolicitante','rcm.costoReserva','rcm.localidad','rcm.fechainicio','rcm.fechafin','rcm.condicion','provincias.nombre as provincia','municipios.municipio','estadotramites.nombre as estadotramite','estadotramites.id as estadotramite_id','rcm.numeroRecibo')
                 ->whereRaw($sentencia)
+                ->where('rcm.deleted_at',null)
                 ->orderBy('rcm.id', 'desc')
                 ->paginate();
 
@@ -181,10 +183,25 @@ class ReservacoordinacionmunicipalController extends Controller
      */
     public function destroy($id)
     {
-        $reserva=Reservacoormunicipal::findOrFail($id);
-        $reserva->delete();
+        DB::beginTransaction();
+        try
+        {
+            $reserva = reservacoormunicipal::findOrFail($id);
+            // return Carbon::now();
+            $reserva->update(['deleted_at' => Carbon::now()]);
+            DB::commit();
+            toast('Reserva de nombre eliminada con éxito!','success');
+            return redirect()->route('reservacoordinacionmunicipal.index');
+        }catch (\Throwable $th) {
+            DB::rollback();
+            toast('Error al eliminar la reserva de nombre!','error');
+            return redirect()->route('reservacoordinacionmunicipal.index');
+        }
+        // return $id;
+        // $reserva=Reservacoormunicipal::findOrFail($id);
+        // $reserva->delete();
 
-        toast('Eliminado correctamente!','warning');
-        return redirect()->route('reservacoordinacionmunicipal.index');
+        // toast('Eliminado correctamente!','warning');
+        // return redirect()->route('reservacoordinacionmunicipal.index');
     }
 }

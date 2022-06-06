@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Reservacoormunicipal;
 use App\Personeriacoormunicipal;
 use Illuminate\Support\Str;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class Personeriacoordinacionmunicipal extends Controller
@@ -74,6 +75,7 @@ class Personeriacoordinacionmunicipal extends Controller
         $reservas=DB::table('reservacoormunicipals as rcm')
                 ->join('estadotramites','estadotramites.id','=','rcm.estadotramite_id')
                 ->select('rcm.id','rcm.nombre as reserva','estadotramites.nombre as estadotramite')
+                ->where('rcm.deleted_at','=',null)
                 ->where('rcm.condicionPersoneria','=','1')
                 ->where('estadotramites.nombre','=','FINALIZADO')
                 ->orderBy('rcm.nombre', 'asc')->get();
@@ -228,6 +230,6 @@ class Personeriacoordinacionmunicipal extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 1;
     }
 }

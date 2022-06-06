@@ -77,7 +77,7 @@
                               </td>
                               <td style="width:115px">
                                 @can('reservacoordinacionmunicipal.edit')
-                                <a href="{{route('reservacoordinacionmunicipal.edit',$reserva->id)}}" class="btn btn-info @if($reserva->estadotramite_id == 2 || $reserva->fechafin < date('Y-m-d')) disabled @endif" title="Editar estado de reserva de nombre"><i class="fas fa-edit"></i>
+                                <a href="{{route('reservacoordinacionmunicipal.edit',$reserva->id)}}" class="btn btn-info @if($reserva->estadotramite_id == 2) disabled @endif" title="Editar estado de reserva de nombre"><i class="fas fa-edit"></i>
                                 </a>
                                 @endcan
                                 @can('reservacoordinacionmunicipal.destroy')

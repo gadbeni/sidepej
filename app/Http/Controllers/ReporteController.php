@@ -15,6 +15,7 @@ class ReporteController extends Controller
 {
     public function pdfcoordinacionmunicipal($id)
     {
+        // return 1;
         $personerias = DB::table('personeriacoormunicipals as pcm')
                     ->join('reservacoormunicipals as rcm','rcm.id','=','pcm.reservacoormunicipal_id')
                     ->join('provincias','provincias.id','=','rcm.provincia_id')
@@ -25,8 +26,9 @@ class ReporteController extends Controller
                     ->join('tipoorganizacions','tipoorganizacions.id','=','pcm.tipoorganizacion_id')
                     ->select('pcm.id','rcm.nombre as nombrepersoneria','provincias.nombre as provincia','municipios.municipio','rcm.localidad','rcm.nombreSolicitante','rcm.numeroRecibo','rcm.costoReserva','rcm.fechainicio','rcm.fechafin','objetos.nombre as objeto','ambitoaplicacions.nombre as ambitoaplicacion','tipoorganizacions.nombre as tipoorganizacion','pcm.representante','pcm.CI','pcm.hojaRuta','pcm.fechaIngreso','expedicions.nombre as expedicion','pcm.numeroCertificado','pcm.numeroResolucion','pcm.fechaResolucion','pcm.documentoMunicipal','pcm.numeroDocumento','pcm.fechaNumerodocumento','pcm.caratulaNotarial','pcm.caratulaExpediente','pcm.folderExpediente','pcm.numeroTestimonio')
                     ->where('pcm.id','=', $id)->get();
-
+// return $personerias;
         $pdf = \PDF::loadview('pdf.pdf_coordinacionmunicipal', compact('personerias'));  
+        // return 1;
         return $pdf->stream('PERSONERIA DIRECCION COORDINACION MUNICIPAL.pdf'); 
     }
 

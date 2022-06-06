@@ -15,11 +15,7 @@
   }
 </style>
 <body>
-	<div id="watermark">
-        <p style="font-family: impact, serif; font-size:80pt;">
-            SIDEPEJ
-        </p>
-    </div>
+	
 
     <h5 align="center">GOBIERNO AUTONOMO DEPARTAMENTAL DEL BENI<br>DIRECCION DE COORDINACION MUNICIPAL</h5>
 

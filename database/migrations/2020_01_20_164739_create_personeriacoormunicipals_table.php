@@ -54,6 +54,9 @@ class CreatePersoneriacoormunicipalsTable extends Migration
             $table->foreign('ambitoaplicacion_id')->references('id')->on('ambitoaplicacions');
             $table->foreign('tipoorganizacion_id')->references('id')->on('tipoorganizacions');
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->smallInteger('status')->default(1);
+            $table->softDeletes();
         });
     }
 

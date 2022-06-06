@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="card card-info">
                 <div class="card-header">
-                    Personerías Jurídicas de coordinación municipal   
+                    Personerías Jurídicas de coordinación municipal
                     <div class="card-tools">
                       <form action="{{route('personeriacoordinacionmunicipal.index')}}" method="GET">
                         <div class="input-group input-group-sm" style="width: 500px;">
@@ -61,7 +61,7 @@
                                 @endcan
 
                                 @can('report.fichadatos_coordinacionmunicipal')
-                                <a href="{{route('pdfcoordinacionmunicipal',$personeria->id)}}" target="_blank" class="btn btn-success" title="Imprimir Detalle de Personería"><i class="fa fa-print"></i></a>
+                                  <a href="{{route('pdfcoordinacionmunicipal',$personeria->id)}}" target="_blank" class="btn btn-success" title="Imprimir Detalle de Personería"><i class="fa fa-print"></i></a>
                                 @endcan
 
                                 @can('personeriacoordinacionmunicipal.show')
