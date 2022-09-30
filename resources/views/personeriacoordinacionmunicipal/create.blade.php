@@ -35,7 +35,7 @@
 				<!-- === -->
 				<div class="form-group">
 					<label for="hojaRuta">Hoja de Ruta (R.D.E.)</label>
-					<input type="text" class="form-control form-control-sm" required value="{{old('hojaRuta')}}" name="hojaRuta" placeholder="Hoja de Ruta del Documento" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="text" class="form-control form-control-sm" value="{{old('hojaRuta')}}" name="hojaRuta" placeholder="Hoja de Ruta del Documento" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					
@@ -44,7 +44,7 @@
 					<!-- === -->
 				<div class="form-group">
 					<label for="representante">Nombre Representante Legal</label>
-					<input type="text" class="form-control form-control-sm" value="{{old('representante')}}" required name="representante" placeholder="Nombre completo de representante legal" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="text" class="form-control form-control-sm" value="{{old('representante')}}" name="representante" placeholder="Nombre completo de representante legal" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 				<!-- === -->
 				<div class="form-group">
@@ -58,7 +58,7 @@
 				<!-- === -->
 				<div class="form-group">
 					<label for="CI">Número de Carnet de Identidad</label>
-					<input type="text" class="form-control form-control-sm" required value="{{old('CI')}}" name="CI" placeholder="Número de Carnet de Identidad" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="text" class="form-control form-control-sm" value="{{old('CI')}}" name="CI" placeholder="Número de Carnet de Identidad" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					<h5 style="color:#adb5bd">Documentos municipales (Alcaldías)</h5>
@@ -78,12 +78,12 @@
 		        <!-- === -->
 				<div class="form-group">
 					<label for="numeroDocumento">Número de: Certificado - Informe - Ley - Resolución Municipal</label>
-					<input type="text" class="form-control form-control-sm" required value="{{old('numeroDocumento')}}" name="numeroDocumento" placeholder="Ingresar Número según el caso" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="text" class="form-control form-control-sm" value="{{old('numeroDocumento')}}" name="numeroDocumento" placeholder="Ingresar Número según el caso" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					<div class="form-group">
 					<label for="fechaNumerodocumento">Fecha de: Certificado - Informe - Ley - Resolución Municipal</label>
-					<input type="date" class="form-control" value="{{old('fechaNumerodocumento')}}" required name="fechaNumerodocumento" style="width: 50%;">
+					<input type="date" class="form-control" value="{{old('fechaNumerodocumento')}}" name="fechaNumerodocumento" style="width: 50%;">
 				</div>
 				<!-- === -->
 			</div>
@@ -136,36 +136,36 @@
 		        <!-- === -->
 				<div class="form-group">
 					<label for="numeroCertificado">Número de Certificado</label>
-					<input type="number" class="form-control form-control-sm" required value="{{old('numeroCertificado')}}" name="numeroCertificado" placeholder="Número de certificado (Dir. Coordinación Municipal)" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="number" class="form-control form-control-sm" value="{{old('numeroCertificado')}}" name="numeroCertificado" placeholder="Número de certificado (Dir. Coordinación Municipal)" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 				<!-- === -->
 				<div class="form-group">
 					<label for="numeroResolucion">Número de Resolución Gobernación</label>
-					<input type="text" class="form-control form-control-sm" required name="numeroResolucion" value="{{old('numeroResolucion')}}" placeholder="Número de resolución de gobernación" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="text" class="form-control form-control-sm" name="numeroResolucion" value="{{old('numeroResolucion')}}" placeholder="Número de resolución de gobernación" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 				<!-- === -->
 				<div class="form-group">
 					<label for="fechaResolucion">Fecha de Resolución Gobernación</label>
-					<input type="date" class="form-control" required value="{{old('fechaResolucion')}}" name="fechaResolucion" style="width: 50%;">
+					<input type="date" class="form-control" value="{{old('fechaResolucion')}}" name="fechaResolucion" style="width: 50%;">
 				</div>
 				<!-- === -->
 				<div class="form-group">
 					<label for="caratulaNotarial">Carátula Notarial</label>
-					<input type="number" class="form-control form-control-sm" required value="{{old('caratulaNotarial')}}" name="caratulaNotarial" placeholder="Número de caratula notarial" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="number" class="form-control form-control-sm" value="{{old('caratulaNotarial')}}" name="caratulaNotarial" placeholder="Número de caratula notarial" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 				<div class="form-group">
 					<label for="caratulaExpediente">Carátula de Expediente</label>
-					<input type="number" class="form-control form-control-sm" required value="{{old('caratulaExpediente')}}" name="caratulaExpediente" placeholder="Número caratula de expediente" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="number" class="form-control form-control-sm" value="{{old('caratulaExpediente')}}" name="caratulaExpediente" placeholder="Número caratula de expediente" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					<div class="form-group">
 					<label for="folderExpediente">Folder de Expediente</label>
-					<input type="number" class="form-control form-control-sm" required value="{{old('folderExpediente')}}" name="folderExpediente" placeholder="Número de folder de expediente" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="number" class="form-control form-control-sm" value="{{old('folderExpediente')}}" name="folderExpediente" placeholder="Número de folder de expediente" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					<div class="form-group">
 					<label for="numeroTestimonio">Número de Testimonio</label>
-					<input type="number" class="form-control form-control-sm" required value="{{old('numeroTestimonio')}}" name="numeroTestimonio" placeholder="Número de Testimonio" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
+					<input type="number" class="form-control form-control-sm" value="{{old('numeroTestimonio')}}" name="numeroTestimonio" placeholder="Número de Testimonio" autocomplete="off" style="text-transform:uppercase;" onkeyup ="this.value=this.value.toUpperCase()">
 				</div>
 					<!-- === -->
 					<div class="form-group">
@@ -181,7 +181,7 @@
 				<div class="control-group">
 		          <label class="control-label">Archivo Adjunto:</label>
 		          <div class="controls">
-		            <input type="file" id="archivoInput" onchange="return validarArchivo()" required name="archivo">
+		            <input type="file" id="archivoInput" onchange="return validarArchivo()" name="archivo">
 		          </div>
 		        </div>
 			
