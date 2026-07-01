@@ -1,0 +1,35 @@
+{
+    "listeners": {
+        "*:8000": {
+            "pass": "routes"
+        }
+    },
+
+    "routes": [
+        {
+            "match": {
+                "uri": "!/index.php"
+            },
+            "action": {
+                "share": "/var/www/sidepej/public$uri",
+                "fallback": {
+                    "pass": "applications/laravel"
+                }
+            }
+        }
+    ],
+
+    "applications": {
+        "laravel": {
+            "type": "php",
+            "root": "/var/www/sidepej/public/",
+            "script": "index.php"
+        }
+    },
+
+    "settings": {
+        "http": {
+            "max_body_size": 67108864
+        }
+    }
+}
